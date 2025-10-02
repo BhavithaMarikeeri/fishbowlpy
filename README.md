@@ -1,71 +1,145 @@
-# fishbowlpy
+🐠 fishbowlpy
+A Python library for interacting with the Fishbowl App API - access bowls, posts, and comments programmatically.
 
-fishbowlpy is a Python library that allows you to interact with fishbowlapp. This library provides a simple interface to login, access bowls, posts, and comments in your fishbowlapp feed.
+Show Image
+Show Image
+Show Image
 
-## First of all what is Fishbowlapp?
+📖 What is fishbowlpy?
+fishbowlpy is a Python library that provides a simple and intuitive interface to interact with Fishbowl App. Whether you're building automation tools, analyzing community discussions, or creating integrations, fishbowlpy makes it easy to access Fishbowl's content programmatically.
 
-Fishbowlapp is an anonymous network where you can post insights of your company without revealing your identity. It's a good platform for those who are looking into job change or want suggestions from random people. It is a Glassdoor initiative but now there are lots of things going on in this platform. You can ask for referrals, give referrals, discuss about ongoing policy changes and that too without revealing your identity. Visit https://www.fishbowlapp.com for more info.
+What is Fishbowl App?
+Fishbowl App is an anonymous professional networking platform (a Glassdoor initiative) where professionals can:
 
-## Features
+💼 Discuss workplace insights anonymously
+🤝 Request and offer job referrals
+💡 Share career advice and experiences
+🗣️ Engage in industry-specific conversations
+Visit fishbowlapp.com to learn more.
 
-It is just the beginning. I have created the basic needs, and **looking for the contributors** to make this library developed quickly.
-
-## Prerequisites
-
-Before you start using fishbowlpy, please make sure you have Python 3.6 or higher installed on your machine.
-
-## Installation
-
-You can install fishbowlpy from the Python Package Index (PyPI). Make sure you have pip installed on your system, and then run the following command:
-
-```
+✨ Features
+🔐 Easy Authentication - Simple login interface
+🎯 Bowl Access - Fetch posts from specific professional communities (bowls)
+📝 Post Retrieval - Get posts with full content and metadata
+💬 Comment Access - Read comments and discussions
+🚀 Lightweight - Minimal dependencies, fast performance
+📚 Well Documented - Comprehensive docs and examples
+🛠️ Installation
+Prerequisites
+Python 3.6 or higher
+pip package manager
+Install from PyPI
+bash
 pip install fishbowlpy
-```
-
-## Usage
-
-Here is an example of the minimum code required to use fishbowlpy. You can find the [full documentation here.](https://mukulbindal.github.io/fishbowlpy/)
-
-```
+Install from Source
+bash
+git clone https://github.com/mukulbindal/fishbowlpy.git
+cd fishbowlpy
+pip install -e .
+🚀 Quick Start
+Basic Example
+python
 from fishbowlpy.fishbowlclient import FishBowlClient
 
-# Initialize the fishbowl client
+# Initialize the client
+
 client = FishBowlClient()
 
-# Access posts in the subscribed bowl
+# Fetch posts from a specific bowl
+
 posts = client.get_posts(bowl_name='tech-india')
 
-print(posts)
-```
+# Display posts
 
-## Documentation
+for post in posts:
+print(f"Post ID: {post['id']}")
+print(f"Content: {post['content']}")
+print("-" \* 50)
+Fetching Posts from Multiple Bowls
+python
+from fishbowlpy.fishbowlclient import FishBowlClient
 
-Documentation is available here [https://mukulbindal.github.io/fishbowlpy/](https://mukulbindal.github.io/fishbowlpy/).
+client = FishBowlClient()
 
-## Contributions
+# List of bowls to fetch from
 
-We encourage you to contribute to this package by following these steps:
+bowls = ['tech-india', 'consulting', 'product-management']
 
-Start by exploring the issues tab and selecting any issue that you would like to work on. This will help you find areas where your skills can be put to good use.
+for bowl_name in bowls:
+print(f"\n=== Posts from {bowl_name} ===")
+posts = client.get_posts(bowl_name=bowl_name)
+print(f"Found {len(posts)} posts")
+Working with Post Details
+python
+from fishbowlpy.fishbowlclient import FishBowlClient
 
-If you have a new feature in mind that you believe would enhance the package, we invite you to create a new issue to propose your idea. This allows the community to provide feedback and discuss the potential implementation before you begin working on it.
+client = FishBowlClient()
+posts = client.get_posts(bowl_name='tech-india')
 
-Before creating a pull request, it's important to ensure that you follow our contribution guidelines. These guidelines outline the required coding style, documentation standards, and any other specific conventions we follow. Adhering to these guidelines helps maintain consistency throughout the codebase.
+# Access post information
 
-By following these steps, you can actively participate in improving the package and help make it even better. Your contributions are highly appreciated and valued by the community.
+for post in posts[:5]: # First 5 posts
+print(f"Title: {post.get('title', 'No title')}")
+print(f"Author: {post.get('author', 'Anonymous')}")
+print(f"Likes: {post.get('likes', 0)}")
+print(f"Comments: {post.get('comment_count', 0)}")
+print()
+📚 Documentation
+Full API documentation is available at: https://mukulbindal.github.io/fishbowlpy/
 
-## Contributors
+Key Methods
+Method Description Parameters
+FishBowlClient() Initialize the client None
+get_posts(bowl_name) Fetch posts from a bowl bowl_name (str): Name of the bowl
+get_comments(post_id) Get comments for a post post_id (str): ID of the post
+🤝 Contributing
+We welcome contributions! Whether you're fixing bugs, adding features, or improving documentation, your help is appreciated.
 
-We eagerly anticipate your valuable contribution to our project. As a token of our appreciation, we have reserved a special section where we will acknowledge your involvement. Rest assured, we will diligently update the contributors list under this designated section to recognize your valuable input.
+How to Contribute
+Explore Issues: Check the Issues tab for open tasks
+Propose Features: Have an idea? Create a new issue to discuss it
+Follow Guidelines: Read our contribution guidelines before submitting PRs
+Submit PR: Create a pull request with your changes
+Contribution Guidelines
+Write clear, descriptive commit messages
+Add tests for new features
+Update documentation as needed
+Follow existing code style and conventions
+One feature/fix per pull request
+🙏 Contributors
+Special thanks to everyone who has contributed to this project:
 
-Special Thanks to the contributors of this project:
+@jaymeklein - Jayme Klein
+Want to see your name here? Contribute to the project!
 
-@jaymeklein Jayme Klein
+🐛 Troubleshooting
+Common Issues
+Issue: ModuleNotFoundError: No module named 'fishbowlpy'
 
-## License
+Solution: Ensure you've installed the package: pip install fishbowlpy
+Issue: Connection errors or timeouts
 
-This project is licensed under the [MIT License](https://github.com/mukulbindal/fishbowlpy/blob/main/LICENSE).
+Solution: Check your internet connection and verify Fishbowl App is accessible
+Issue: Empty results from get_posts()
 
-## Contact Information
+Solution: Verify the bowl name is correct and publicly accessible
+Getting Help
+📖 Check the Documentation
+🐛 Report bugs in Issues
+💬 Ask questions in Discussions
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Feel free to reach out to me with any questions or suggestions. I look forward to hearing from you at mukulbindal170299@gmail.com
+📧 Contact
+Maintainer: Mukul Bindal
+
+📧 Email: mukulbindal170299@gmail.com
+🐙 GitHub: @mukulbindal
+⭐ Show Your Support
+If you find fishbowlpy useful, please consider:
+
+⭐ Starring the repository
+🐛 Reporting bugs
+💡 Suggesting new features
+🤝 Contributing to the codebase
+Made with ❤️ by the open-source community
