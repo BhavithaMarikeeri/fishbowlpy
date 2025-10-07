@@ -53,6 +53,7 @@ class FishBowlClient:
     def refresh_session(self):
         """This is a placeholder method that will be used to refresh the session"""
         pass
+    
     def get_bowls_names(self):
         """This is a placeholder method that will be used to get the names of the subscribed bowls"""
         # Hard coded for now
@@ -62,10 +63,27 @@ class FishBowlClient:
     def get_posts(self, bowl_name:str):
         """This method returns the posts in the `bowl_name` in json format.
         
-        :param bowl_nameBowl name from where to get the posts.
+        :param bowl_name: Bowl name from where to get the posts.
         
         :return: Posts in json format.
         """
         return self.__fishbowl_api.get_posts(bowl_name=bowl_name)
     
+    def get_post_comments(self, post_id: str, **kwargs):
+        """This method returns the comments for a given post_id in json format.
         
+        :param post_id: Post ID from where to get the comments.
+        :param sort: Sort order for comments (default: 'byDate', options: 'byDate', 'byPopularity')
+        :param start: Starting index for pagination (default: 0)
+        :param count: Number of comments to return (default: 20)
+        :param **kwargs: Additional parameters for flexible configuration
+        
+        :return: Comments in json format.
+        
+        Basic Usage:
+        >>> from fishbowlpy.fishbowlclient import FishBowlClient
+        >>> client = FishBowlClient()
+        >>> comments = client.get_post_comments(post_id='12345')
+        >>> comments = client.get_post_comments(post_id='12345', count=50, sort='byPopularity')
+        """
+        return self.__fishbowl_api.get_post_comments(post_id=post_id, **kwargs)
