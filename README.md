@@ -153,6 +153,7 @@ We welcome contributions! Whether you're fixing bugs, adding features, or improv
 Special thanks to everyone who has contributed to this project:
 
 - [@jaymeklein](https://github.com/jaymeklein) - Jayme Klein
+- [@BhavithaMarikeeri](https://github.com/BhavithaMarikeeri) - Bhavitha Marikeeri
 
 **Want to see your name here?** Contribute to the project!
 
