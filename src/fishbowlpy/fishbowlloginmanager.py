@@ -106,6 +106,49 @@ class FishBowlLoginManager:
 
         return True
 
+    def refresh_token(self):
+        """Refresh the authentication token and update the session"""
+        try:
+            LOGGER.debug("Attempting to refresh token...")
+            
+            # Get current session
+            session_data = self.get_session_data()
+            
+            if not session_data or not self.__session_key:
+                LOGGER.error("No session available for refresh")
+                return False
+            
+            # For now, we'll implement a simple session validation
+            # In future, this can be enhanced with actual token refresh API calls
+            if self.is_token_expired():
+                LOGGER.error("Session has expired, please login again")
+                return False
+            else:
+                LOGGER.debug("Session is still valid")
+                return True
+                
+        except Exception as e:
+            LOGGER.error(f"Error refreshing token: {e}")
+            return False
+
+    def is_token_expired(self):
+        """Check if the current token is expired"""
+        if not self.__session_expiry:
+            return True
+        
+        # Add a 5-minute buffer to refresh before actual expiry
+        buffer_time = 300  # 5 minutes in seconds
+        return self.__session_expiry < (time.time() + buffer_time)
+
+    def get_session_data(self):
+        """Get current session data as dictionary"""
+        if self.__session_key and self.__session_expiry:
+            return {
+                config.SESSION_KEY_COOKIE_VALUE: self.__session_key,
+                config.SESSION_KEY_COOKIE_EXPIRY: self.__session_expiry,
+            }
+        return None
+
     def set_session_key(self, session_key=None, session_expiry=None):
         """Sets the session key and session expiry
 
@@ -125,4 +168,3 @@ class FishBowlLoginManager:
             str: Session key for current session
         """        
         return self.__session_key
-        
