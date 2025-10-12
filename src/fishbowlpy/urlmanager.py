@@ -32,3 +32,14 @@ class FishbowlURLManager:
     
     def get_posts_url(self, bowl_id, sort:str='byDate', start:int=0, count:int=20):
         return f"https://api.fishbowlapp.com/v4/feed/{bowl_id}/posts?sort={sort}&skipSystemMessages=true&start={start}&count={count}"
+    
+    def get_comments_url(self, post_id, sort='byDate', start=0, count=20):
+        """Construct URL for fetching comments of a specific post.
+        
+        :param post_id: The ID of the post
+        :param sort: Sort order for comments (default: 'byDate')
+        :param start: Starting index for pagination (default: 0)
+        :param count: Number of comments to fetch (default: 20)
+        :return: Complete URL for comments API endpoint
+        """
+        return f"https://api.fishbowlapp.com/v4/posts/{post_id}/comments?sort={sort}&start={start}&count={count}"

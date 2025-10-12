@@ -263,7 +263,6 @@ class FishBowlClient:
         """This method returns the posts in the `bowl_name` in json format.
         
         :param bowl_name: Bowl name from where to get the posts.
-        :type bowl_name: str
         
         :return: Posts in json format.
         :rtype: dict
